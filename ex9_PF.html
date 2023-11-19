@@ -43,8 +43,8 @@
     <div class="container-fluid">
         <div class=" row mt-3 mb-3">
             <p class="lead">Selecione uma imagem</p>
-            <input type="file" id="idFile">
-            <input type="image" id="idImg">
+            <input class="picture__input form-control form-control" accept="image/*" id="idFile" type="file">
+            <input type="image" id="idImg" width="250px">
         </div>
         <div class="mb-3">
             <a href="" "https://placehold.co/350x150/000000/FFF"> </a>
@@ -82,73 +82,89 @@
     <script>
         function main() {
 
-
-
-
-
-
             const btnMensagem = document.getElementById("idBtnMessage");
             const txtMensagem = document.getElementById("idTextMessage");
             const emissor = document.getElementById("idEmissor");
-
             const destinatario = document.getElementById("idDestinatario");
-
-
             const btnCriarCard = document.getElementById("idBtnCard");
-
+            const inputFile = document.getElementById('idFile');
+            const pictureImage = document.getElementById('idImg');
             const cards = document.getElementById('cards');
+
             let NomeEmissor = "";
             let NomeDestina = "";
+            let mensagem = txtMensagem.value;
 
 
             //função para criar card
 
             btnCriarCard.addEventListener("click", buildCards);
 
-            function buildCards() {
-                cards.innerHTML = "";
-                emissor.addEventListener("mouseenter", function () {
-                    NomeEmissor = emissor.value;
-                });
-                destinatario.addEventListener("mouseenter", function () {
-                    NomeDestina = destinatario.value;
-                });
-                function addCard(NomeEmissor, NomeDestina) {
-                    return '<div class="card border-success mb-3" style="max-width: 18rem;">' +
-                        '<div class="card-header bg-transparent border-success">' + NomeEmissor + '</div>' +
-                        '<div class="card-body text-success">' +
-                        ' <h5 class="card-title">' + NomeDestina + '</h5>' +
-                        '<p class="card-text"></p>' +
-                        '</div>' +
-                        '<div class="card-footer bg-transparent border-success">' + NomeDestina + '</div>' +
-                        '</div>'
-                }
+            inputFile.addEventListener('change', function (e) {
+                const inputTarget = e.target;
+                const file = inputTarget.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.addEventListener('load', function (e) {
+                        const ReaderTarget = e.target;
+                       const img = document.createElement('img');
+                        img.src = ReaderTarget.result;
+                      
+                       pictureImage.classList.add('img');
+                        pictureImage.innerHTML = '';
+                       pictureImage.appendChild(img);
+                       
+                    });
+                        reader.readAsDataURL(file);
+                    }else
+                        {
+                            pictureImage.innerHTML = pictureImage.text;
+                        }
+            });
+        
 
+        
+        function buildCards() {
+            cards.innerHTML = "";
 
-                cards.innerHTML += addCard(emissor.value, destinatario.value);//escreve na página de HTML
-
+            function addCard(NomeEmissor, source, message, NomeDestina) {
+                return '<div class="card border-success mb-3" style="max-width: 18rem;">' +
+                    '<div class=" lead card-header bg-transparent border-success"> Para: ' + NomeDestina + '</div>' +
+                    '<div class="card-body text-success">' +
+                    '   <img src=\.."' + source + '" class="card-img-top" alt="...">' +
+                    ' <h5 class="card-title">Message </h5>' +
+                    '<p class="card-text">' + message + '</p>' +
+                    '</div>' +
+                    '<div class="lead card-footer bg-transparent border-success"> De: ' + NomeEmissor + '</div>' +
+                    '</div>'
             }
 
 
+            cards.innerHTML += addCard(emissor.value, imgSource.value, destinatario.value);//escreve na página de HTML
 
-
-            //funcão para gerar a mensagem
-            btnMensagem.addEventListener("click", addMessage());
-
-            function addMessage() {
-                let url = "	https://api.adviceslip.com/advice";
-                fetch(url).then(function (res) {
-                    return res.json();
-                }).then(function (data) {
-                    mensagem = data.slip.advice;
-                    console.log(mensagem);
-                    txtMensagem.innerHTML = mensagem;
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            }
         }
 
+
+
+
+        //funcão para gerar a mensagem
+        btnMensagem.addEventListener("click", addMessage());
+
+        function addMessage() {
+            let url = "	https://api.adviceslip.com/advice";
+            fetch(url).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                mensagem = data.slip.advice;
+                console.log(mensagem);
+                txtMensagem.innerHTML = mensagem;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+ 
+    }
+    
     </script>
 </body>
 
