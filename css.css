@@ -1,0 +1,41 @@
+#picture__input{
+    display: none;
+}
+.picture{
+    width: 200px;
+    height: 200px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: color 300ms ease-in-out background 300ms ease-in-out, outline 300ms ease-in-out;
+    outline: 2px solid;
+}
+
+.picture:hover{
+
+    color: #555;
+    background:transparent;
+
+}
+.picture:active{
+
+    color: #aaa;
+    background:#ddd;
+    border-color: burlywood;
+
+}
+
+.picture:focus{
+outline: 2px solid black;
+
+}
+
+.picture__img{
+    max-width: 200px;
+    max-height: 200px;
+    
+}
