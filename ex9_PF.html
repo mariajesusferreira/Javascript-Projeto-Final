@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,10 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="css.css">
+        <link rel="stylesheet" type="text/css" href="css.css">
     <title>Construtor de cartões</title>
 </head>
-
 <body onload="main()">
     <div class="bg-light pt-3 pb-3">
         <div class="container">
@@ -22,45 +20,43 @@
     </div>
     <div class="container-fluid bg-transparent pt-3 pb-3 border border-success p-2 mb-2 ">
         <div class=" mb-3">
-            <div class="row align-items-start>
-                <p class=" lead">
+            <div class= "row align-items-start>
+                <p class="lead">
                 <button type="submit" id="idBtnMessage" style="width: 10rem; height:3rem;" class="btn btn-primary">Gerar
                     Mensagem</button>
-                <p class="lead" id="idTextMessage"></p>
+                <p class="lead" id="idTextMessage" ></p>
             </div>
         </div>
     </div>
     <div class="container container-fluid">
-        <div class="row align-items-start" <div class="col">
-            <h1 class="lead">Nome do Destinário</h1>
-            <input type="text" id="idDestinatario" width="50px" height="50px">
-        </div>
-        <div class="col">
-            <p class="lead"> Nome do Emissor</p>
-            <input type="text" id="idEmissor">
-        </div>
-    </div>
-    </div>
+        <div class= "row align-items-start"
+             <div class="col">
+                <h1 class="lead">Nome do Destinário</h1>
+                <input type="text" id="idDestinatario" width="50px" height="50px">
+             </div>
+             <div class="col">
+                <p class="lead"> Nome do Emissor</p> 
+                <input type="text" id="idEmissor">
+            </div>
+        </div>    
+    </div>  
     <div class="container-fluid">
         <div class=" row mt-3 mb-3">
             <label class="picture" for="picture__input" tabindex="0">
                 <span class="picture__image" style=".css"> </span>
             </label>
-            <input type="file" name="picture__input" id="picture__input">
+            <input type="file"  name="picture__input" id="picture__input">  
         </div>
-
+      
     </div>
     <div class="display-6 fs-6 container-fluid bg-light pt-3 pb-3 border border-success p-2 mb-2 ">
         <div class=" mb-3">
             <div>
-                <button type="submit" id="idBtnCard" style="width: 10rem; height:3rem;" class="btn btn-primary">Create
-                    Card
+                <button type="submit" id="idBtnCard" style="width: 10rem; height:3rem;" class="btn btn-primary">Create Card
                 </button>
-                <button type="submit" id="idSaveCard" style="width: 10rem; height:3rem;" class="btn btn-primary"> Save
-                    Card
+                <button type="submit" id="idSaveCard" style="width: 10rem; height:3rem;" class="btn btn-primary"> Save Card
                 </button>
-                <button type="submit" id="idSendCard" style="width: 10rem; height:3rem;" class="btn btn-primary"> Send
-                    Card
+                <button type="submit" id="idSendCard" style="width: 10rem; height:3rem;" class="btn btn-primary"> Send Card
                 </button>
                 <p class="lead" id="idTextMessage"></p>
             </div>
@@ -71,21 +67,21 @@
             <!-- Content goes here -->
         </div>
     </div>
-    </form>
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </form>   
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
     <script>
-        function googleTranslateElementInit() {
+        function googleTranslateElementInit(){
             new google.translate.TranslateElement({
-                papelLanguage: "en"
-            },
+                papelLanguage: "en"},
                 'google_translate_element'
             );
         }
-
+        
     </script>
+  
     <script>
         function main() {
-
+           
             const btnMensagem = document.getElementById("idBtnMessage");
             const saveCard = document.getElementById("idSaveCard");
             const txtMensagem = document.getElementById("idTextMessage");
@@ -95,117 +91,123 @@
             const inputFile = document.querySelector('#picture__input');
             const pictureImage = document.querySelector('.picture__image');
             const cards = document.getElementById('cards');
-            const pictureImageText = "Selecione uma imagem ";
-            pictureImage.innerHTML = pictureImageText;
-            let mensagem = "";
+            const pictureImageText="Selecione uma imagem ";
+            const btnSaveCard=document.getElementById('idSaveCard');
+            pictureImage.innerHTML=pictureImageText;
+            let mensagem="";
 
-            let card =
+        let card=
             {
                 NomeEmissor: " ",
                 NomeDestina: "",
-                Mensagem: "",
-                imagem: "",
-            }
-            let myArrCards = [];
-
-            card.NomeDestina = destinatario.value;
-            card.NomeEmissor = emissor.value;
-            card.Mensagem = mensagem;
-            card.imagem = pictureImage.src;
-            console.log(card);
-
-
-
-            saveCard.addEventListener("click", showCards());
-            function showCards() {
-
-                if (localStorage.myArrCards) {
-
-                    myArrCards = JSON.parse(localStorage.getItem(myArrCards));
-                }
-
-                for (let i in myArrCards) {
-
-                    cards.innerHTML = '<div class="card border-success mb-3" style="max-width: 18rem;">' +
-                        '<div class=" lead card-header bg-transparent border-success"> Para: ' + myArrCards[i].NomeDestina + '</div>' +
-                        '<div class="card-body text-success">' +
-                        '   <img src="' + myArrCards[i].imagem + '" class="card-img-top" alt="...">' +
-                        ' <h5 class="card-title">Message </h5>' +
-                        '<p class="card-text">' + myArrCards[i].Mensagem + '</p>' +
-                        '</div>' +
-                        '<div class="lead card-footer bg-transparent border-success"> De: ' + myArrCards[i].NomeEmissor + '</div>' +
-                        '</div>'
-
-                }
+                Mensagem:"",
+                imagem:"",
             }
 
 
+         card.NomeDestina=destinatario.value;
+         card.NomeEmissor=emissor.value;
+         card.Mensagem= mensagem;
+         card.imagem= "";
+
+         let myArrCards=[];
+        let arrAux=[];
+      
 
 
-            //Cria a imagem
+//mostrar os dados contidos no localstorage
+
+
+   
+    if(localStorage.myArrCards){
+arrAux=JSON.parse(localStorage.getItem('myArrCards'));
+    }
+
+    for( let i in arrAux){
+            cards.innerHTML += '<div class="card border-success mb-3" style="max-width: 18rem;">' +
+                    '<div class=" lead card-header bg-transparent border-success"> Para: ' + arrAux[i].NomeDestina + '</div>' +
+                    '<div class="card-body text-success">' +
+                    '   <img src="'+ arrAux[i].imagem+ '" class="card-img-top" alt="...">' +
+                    ' <h5 class="card-title">Message </h5>' +
+                    '<p class="card-text">' + arrAux[i].Mensagem+ '</p>' +
+                    '</div>' +
+                    '<div class="lead card-footer bg-transparent border-success"> De: ' +arrAux[i].NomeEmissor + '</div>' +
+                    '</div>'
+    }
+   
+
+
+          //Cria a imagem
 
             inputFile.addEventListener('change', function (e) {
                 const inputTarget = e.target;
                 const file = inputTarget.files[0];
-
+                
                 if (file) {
                     const reader = new FileReader();
                     reader.addEventListener('load', function (e) {
-                        const ReaderTarget = e.target;
-                        img = document.createElement('img');
-                        img.src = ReaderTarget.result;
-                        img.classList.add('picture__img');
-                        pictureImage.innerHTML = '';
-                        pictureImage.appendChild(img);
-                        card.imagem = img;
+                    const ReaderTarget = e.target;
+                    img = document.createElement('img');
+                    img.src = ReaderTarget.result;
+                    img.classList.add('picture__img');                      
+                    pictureImage.innerHTML = '';
+                    pictureImage.appendChild(img);
+                      card.imagem=img; 
                     });
-                    reader.readAsDataURL(file);
-                } else {
-                    pictureImage.innerHTML = pictureImageText;
-                }
+                        reader.readAsDataURL(file);
+                    }else
+                        {
+                            pictureImage.innerHTML = pictureImageText;
+                        }
             });
+        
+ //funcão para gerar a mensagem
+ btnMensagem.addEventListener("click", addMessage);
 
-            //funcão para gerar a mensagem
-            btnMensagem.addEventListener("click", addMessage());
+function addMessage() {
+    console.log(2);
+    var nrMin = 1;
+      var nrMax = 20;
+      var random = Math.floor(Math.random() * (nrMax - nrMin)) + nrMin;
+    let url = "	https://api.adviceslip.com/advice/"+random;
+    fetch(url).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        mensagem = data.slip.advice;
+        card.Mensagem=mensagem;
+        txtMensagem.innerHTML=mensagem;
+    }).catch(function (error) {
+        console.log(error);
+    });
+ 
+}
 
-            function addMessage() {
-                let url = "	https://api.adviceslip.com/advice";
-                fetch(url).then(function (res) {
-                    return res.json();
-                }).then(function (data) {
-                    card.Mensagem = data.slip.advice;
-                    txtMensagem.innerText = card.Mensagem;
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            }
-
-            //função para criar card
-
-            btnCriarCard.addEventListener("click", buildCards);
+  //função para criar card
+ 
+  btnCriarCard.addEventListener("click", buildCards);   
             function buildCards() {
-                function addCard(NomeEmissor, imagem, message, NomeDestina) {
-                    return '<div class="card border-success mb-3" style="max-width: 18rem;">' +
-                        '<div class=" lead card-header bg-transparent border-success"> Para: ' + NomeDestina + '</div>' +
-                        '<div class="card-body text-success">' +
-                        '   <img src="' + imagem + '" class="card-img-top" alt="...">' +
-                        ' <h5 class="card-title">Message </h5>' +
-                        '<p class="card-text">' + message + '</p>' +
-                        '</div>' +
-                        '<div class="lead card-footer bg-transparent border-success"> De: ' + NomeEmissor + '</div>' +
-                        '</div>'
-                }
-
-                myArrCards.push(card);
-                localStorage.myArrCards = JSON.stringify(card);
-                console.log(myArrCards);
-                cards.innerHTML += addCard(card.NomeEmissor, card.imagem.src, card.Mensagem, card.NomeDestina);//escreve na página de HTML
-
+            function addCard(NomeEmissor, imagem,  message, NomeDestina) {
+                return '<div class="card border-success mb-3" style="max-width: 18rem;">' +
+                    '<div class=" lead card-header bg-transparent border-success"> Para: ' + NomeDestina + '</div>' +
+                    '<div class="card-body text-success">' +
+                    '   <img src="'+ imagem + '" class="card-img-top" alt="...">' +
+                    ' <h5 class="card-title">Message </h5>' +
+                    '<p class="card-text">' + message + '</p>' +
+                    '</div>' +
+                    '<div class="lead card-footer bg-transparent border-success"> De: ' + NomeEmissor + '</div>' +
+                    '</div>'
             }
-
+                  
+            myArrCards.push(card);
+            localStorage.myArrCards=JSON.stringify(myArrCards);
+            console.log(myArrCards);
+            console.log(card);
+            cards.innerHTML += addCard(card.NomeEmissor, card.imagem.src, card.Mensagem, card.NomeDestina);//escreve na página de HTML
+           
+        }
+          
         }
 
     </script>
 </body>
-
 </html>
