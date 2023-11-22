@@ -12,7 +12,7 @@
     cursor: pointer;
     font-family: sans-serif;
     transition: color 300ms ease-in-out background 300ms ease-in-out, outline 300ms ease-in-out;
-    outline: 2px solid;
+    outline: 2px solid blue;
 }
 
 .picture:hover{
